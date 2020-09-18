@@ -180,7 +180,7 @@ public class RoomList extends JFrame {
                 tohome();
             }
         });
-        btnNewButton.setBounds(625, 13, 108, 30);
+        btnNewButton.setBounds(352, 13, 108, 30);
         panel_3.add(btnNewButton);
 
 
@@ -192,7 +192,7 @@ public class RoomList extends JFrame {
             }
         });
         button_3.setBounds(488, 13, 93, 30);
-        panel_3.add(button_3);
+//        panel_3.add(button_3);
 
         JButton button_2 = new JButton("战绩排名");
         button_2.addActionListener(new ActionListener() {
@@ -202,7 +202,7 @@ public class RoomList extends JFrame {
             }
         });
         button_2.setBounds(352, 13, 93, 30);
-        panel_3.add(button_2);
+//        panel_3.add(button_2);
 
         list.setOpaque(false);
         userScroll.setBounds(23, 20, 205, 520);
