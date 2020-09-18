@@ -54,7 +54,7 @@
         </repository>
     </repositories>
     <build>
-        <finalName>rpa</finalName>
+        <finalName>rpa-gobang</finalName>
         <plugins>
 <!--            <plugin>-->
 <!--                <groupId>org.springframework.boot</groupId>-->
@@ -80,26 +80,14 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.5.5</version>
                 <configuration>
-                    <!-- 客户端 -->
                     <archive>
                         <manifest>
                             <mainClass>chess.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
-                        <descriptorRef>rpa-gobang-client</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-
-                    <!-- 服务端
-                    <archive>
-                        <manifest>
-                            <mainClass>net.MyServer</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>rpa-gobang-server</descriptorRef>
-                    </descriptorRefs>
-                    -->
                 </configuration>
                 <!--下面是为了使用 mvn package命令，如果不加则使用mvn assembly-->
                 <executions>
