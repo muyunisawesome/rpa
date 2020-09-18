@@ -434,7 +434,7 @@ public class Room extends JFrame {
     }
 
     /**
-     * 功能：跳转至房间列表页面 作者：林珊珊
+     * 功能：跳转至房间列表页面
      */
     public void toRoomList() {
         if (home == null)

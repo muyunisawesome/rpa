@@ -1,37 +1,17 @@
 package msg;
 
+import lombok.Data;
 import net.MyServer;
 import entity.RoomPojo;
 
 /**
  * 客户端判定赢棋之后，向服务器发送的报文类
- *
- * @author john
  */
+@Data
 public class ClientGameOver extends BaseMsg {
+
     private int roomid;
     private boolean isleft;
-
-
-    public int getRoomid() {
-        return roomid;
-    }
-
-
-    public void setRoomid(int roomid) {
-        this.roomid = roomid;
-    }
-
-
-    public boolean isIsleft() {
-        return isleft;
-    }
-
-
-    public void setIsleft(boolean isleft) {
-        this.isleft = isleft;
-    }
-
 
     public ClientGameOver(int roomid, boolean isleft) {
         super();

@@ -13,7 +13,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 /**
  * 自定义滚动条UI
  *
- * @author 黄欢欢
+ *
  * @date 2016年9月27日
  */
 public class ScrollbarUI extends BasicScrollBarUI {

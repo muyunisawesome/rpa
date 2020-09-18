@@ -5,8 +5,6 @@ import entity.RoomPojo;
 
 /**
  * 玩家 准备 报文类
- *
- * @author john
  */
 public class ClientBeReady extends BaseMsg {
 

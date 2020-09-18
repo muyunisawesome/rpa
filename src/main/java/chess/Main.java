@@ -8,7 +8,7 @@ import javax.swing.*;
 
 /*************************************************
  * 功能: 程序开始入口
- * 作者: 黄欢欢  时间: 2016-09-20
+ *
  *************************************************/
 public class Main {
     public static void main(String[] args) {
@@ -17,14 +17,14 @@ public class Main {
             public void run() {
                 setLookAndFeel(); //设置窗体风格
                 new Home(); //创建游戏主界面
-                //new Thread(new AudioPlayer("resource/audio/background.wav")).start();
+                new Thread(new AudioPlayer("resource/audio/background.wav")).start();
             }
         });
     }
 
     /*************************************************
      * 功能: 设置窗体风格
-     * 作者: 黄欢欢   时间: 2016-09-21
+     *
      *************************************************/
     private static void setLookAndFeel() {
         try {

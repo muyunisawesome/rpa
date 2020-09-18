@@ -346,7 +346,7 @@ public class RoomList extends JFrame {
 
     /**
      * 功能: 当窗口缩放拖动时重绘窗口
-     * 作者: 黄欢欢   时间: 2016-09-29
+     *
      *
      * @param time   重绘时间
      * @param x      起点横坐标
