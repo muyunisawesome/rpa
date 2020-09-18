@@ -5,7 +5,7 @@ import net.MyServer;
 import entity.RoomPojo;
 
 /**
- * 想悔棋者向服务端发送的报文类
+ * 悔棋
  */
 @Data
 public class ClientBackChess extends BaseMsg {

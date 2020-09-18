@@ -7,7 +7,7 @@ import entity.RoomPojo;
 /**
  * 记录房间列表的报文类，由服务器发往客户端
  *
- * 时间：2016.09.22
+ *
  */
 public class ServerRoomListMsg extends BaseMsg {
 	private List<RoomPojo> roomList;
