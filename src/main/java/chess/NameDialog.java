@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 
 /**
  * 功能: 姓名输入框
- * 作者: 黄欢欢   时间: 2016-09-21
  */
 public class NameDialog extends JDialog {
   private Home home;
@@ -50,7 +49,6 @@ public class NameDialog extends JDialog {
 
   /**
    * 功能: 给成员属性添加监听事件
-   * 作者: 黄欢欢   时间: 2016-09-21
    */
   private void addAction() {
     ok.addActionListener(new ActionListener() {

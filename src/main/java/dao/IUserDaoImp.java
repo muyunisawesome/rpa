@@ -7,7 +7,6 @@ import java.util.*;
 import entity.User;
 /**
  * 功能: User类接口实现
-* @author 王小明  时间: 2016-09-27
  */
 public class IUserDaoImp implements IUserDao {
 	String sql=null;

@@ -3,7 +3,6 @@ package entity;
 import java.io.Serializable;
 /**
  * 房间实体类
- * @author john
  *
  */
 

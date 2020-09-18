@@ -4,7 +4,6 @@ import util.IChess;
 
 /**
  * 功能: 人类线程
- * 作者: 黄欢欢  时间: 2016-09-28
  */
 public class HumanThread implements Runnable {
   private IChess chess;
@@ -17,7 +16,6 @@ public class HumanThread implements Runnable {
 
   /**
    * 人类线程开启鼠标监听
-   * 作者: 黄欢欢  时间: 2016-09-28
    */
   public void run() {
     chessTable.addMouseListener(chessTable.new MouseHandler());

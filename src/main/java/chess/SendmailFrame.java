@@ -36,7 +36,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
  * 功能: 邮件发送功能，邮件反馈.
- * 作者: 王小明   时间: 2016-09-23
  */
 public class SendmailFrame extends JFrame {
 	JTextArea textArea = null;
@@ -57,7 +56,6 @@ setVisible(true);
 
 		  /**
 		   * 功能: 输入文本内容，点击发送，发送按钮监听邮箱发送功能
-		   * 作者: 王小明   时间: 2016-09-23
 		   */
 
     JButton sendButton = new JButton("发送");
@@ -76,7 +74,6 @@ setVisible(true);
     int index2=0;
     /**
 	   * 功能: 判定邮件内容是否为空
-	   * 作者: 王小明   时间: 2016-09-23
 	   */
     for(int i=0;i<r.length();i++)
     {
@@ -185,7 +182,6 @@ setVisible(true);
 	}
 	  /**
 	   * 功能: 邮件发送功能，邮件反馈.
-	   * 作者: 王小明   时间: 2016-09-23
 	   */
 	public void sendmail() throws AddressException, MessagingException{
 	Properties prop = new Properties();

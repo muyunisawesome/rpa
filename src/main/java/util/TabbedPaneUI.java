@@ -16,7 +16,6 @@ import java.util.Arrays;
 
 /**
  * 功能: 自定义TabbedPaneUI
- * @author 黄欢欢  时间: 2016-09-27
  */
 public class TabbedPaneUI extends BasicTabbedPaneUI {
 

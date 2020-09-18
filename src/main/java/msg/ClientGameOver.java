@@ -4,7 +4,6 @@ import net.MyServer;
 import entity.RoomPojo;
 /**
  * 客户端判定赢棋之后，向服务器发送的报文类
- * @author john
  *
  */
 public class ClientGameOver extends BaseMsg{

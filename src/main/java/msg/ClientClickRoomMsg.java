@@ -7,7 +7,6 @@ import net.MyServer;
 import entity.User;
 /**
  * 向服务器发送点击房间报文类
- * @author john
  *
  */
 public class ClientClickRoomMsg extends BaseMsg{

@@ -5,7 +5,6 @@ import net.MyClient;
 import entity.RoomPojo;
 /**
  * 进入房间报文类
- * @author john
  *
  */
 public class ServerEnterRoomMsg extends BaseMsg{

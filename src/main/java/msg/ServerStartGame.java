@@ -3,8 +3,7 @@ package msg;
 import net.MyClient;
 
 /**
- *服务器传递开始游戏报文给客户端 
- * @author john
+ *服务器传递开始游戏报文给客户端
  *
  */
 public class ServerStartGame extends BaseMsg{

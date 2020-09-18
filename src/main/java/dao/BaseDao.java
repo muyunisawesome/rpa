@@ -9,7 +9,6 @@ import java.sql.Statement;
 
 /**
  * 功能: 数据库公共类，工具类
-* @author 王小明  时间: 2016-09-27
  */
 public class BaseDao {
 	// 1.四个静态常量的参数

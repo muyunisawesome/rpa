@@ -16,7 +16,6 @@ import java.util.List;
 
 /**
  * 服务器类
- * @author zzb  
  *
  */
 public class MyServer {
@@ -111,7 +110,6 @@ public class MyServer {
 	}
 	/**
 	 * 线程类处理多客户端连接
-	 * @author john
 	 *
 	 */
 	class WaitForClientThread extends Thread{
@@ -133,7 +131,6 @@ public class MyServer {
 	}
 	/**
 	 * 处理所连接的客户端的报文类数据收发
-	 * @author john
 	 *
 	 */
 	public class ClientChatThread extends Thread {

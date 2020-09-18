@@ -330,7 +330,6 @@ public class ChessTable extends JPanel {
     /**
      * 输入：监听器所获取的鼠标坐标 功能：为棋盘作悔棋操作 输出：无
      *
-     * @author 林珊珊
      */
     public void unpaintItem() {
         if (model == 0) {//联机悔棋
