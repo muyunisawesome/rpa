@@ -1,11 +1,16 @@
 package dao;
 
+import util.ResourceLoad;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * 功能: 数据库公共类，工具类
@@ -13,10 +18,20 @@ import java.sql.Statement;
 public class BaseDao {
 
     // 1.四个静态常量的参数
-    public static final String url = "jdbc:mysql://172.16.24.49:3306/t3_group";
-    public static final String username = "pgm_user";
-    public static final String password = "mDuYeuj5s8e5YPHh";
-    public static final String classname = "com.mysql.jdbc.Driver";
+    private static String url = "jdbc:mysql://172.16.24.49:3306/t3_group";
+    private static String username = "pgm_user";
+    private static String password = "mDuYeuj5s8e5YPHh";
+    private static String classname = "com.mysql.jdbc.Driver";
+
+    public BaseDao() {
+         try {
+             Properties properties = ResourceLoad.properties("server.properties");
+             url = properties.getProperty("jdbc.url");
+             username = properties.getProperty("jdbc.user");
+             password = properties.getProperty("jdbc.password");
+             classname = properties.getProperty("jdbc.driver");
+         } catch (Exception e){}
+    }
 
     // 2.加载驱动并获取连接
     public static Connection getConnection() {
