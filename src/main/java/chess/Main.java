@@ -17,7 +17,7 @@ public class Main {
             public void run() {
                 setLookAndFeel(); //设置窗体风格
                 new Home(); //创建游戏主界面
-                //new Thread(new AudioPlayer("resource/audio/background.wav")).start();
+                new Thread(new AudioPlayer("resource/audio/background.wav")).start();
             }
         });
     }
