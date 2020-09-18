@@ -11,7 +11,7 @@ public class ResourceLoad {
             return resource;
         }
         URL url = ResourceLoad.class.getResource("/");
-        String uri = url.getPath().substring(0, url.getPath().lastIndexOf("/bin"));
+        String uri = url.getPath();
         if (resource.startsWith("/")) {
             return uri.concat(resource);
         }
