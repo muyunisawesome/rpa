@@ -18,19 +18,17 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `gobang_user`;
+CREATE TABLE `gobang_user` (
   `name` varchar(30) NOT NULL,
   `fileName` varchar(50) DEFAULT NULL,
   `winNum` int(20) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('clx', 'E:\\filename\\0', '98');
-INSERT INTO `user` VALUES ('czf', 'E:\\filename\\0', '75');
-INSERT INTO `user` VALUES ('ww', 'E:\\filename\\0', '98');
-INSERT INTO `user` VALUES ('wxm', 'E:\\filename\\0', '58');
-INSERT INTO `user` VALUES ('zzb', 'E:\\filename\\0', '56');
+DROP TABLE IF EXISTS `gobang_server`;
+CREATE TABLE `gobang_server` (
+  `ip` varchar(30) NOT NULL
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

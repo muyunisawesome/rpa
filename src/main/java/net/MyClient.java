@@ -12,6 +12,8 @@ import java.net.UnknownHostException;
 import chess.NameDialog;
 import chess.Room;
 import chess.RoomList;
+import dao.IServerDao;
+import dao.IServerDaoImpl;
 import msg.BaseMsg;
 
 /**
@@ -22,6 +24,8 @@ import msg.BaseMsg;
 public class MyClient {
 
     private static MyClient myclient;
+
+    public IServerDao serverDao = new IServerDaoImpl();
 
     private MyClient() {
     }
@@ -82,8 +86,17 @@ public class MyClient {
      * @return是否成功连接
      */
     public boolean connect() {
+        String server = serverDao.findServer();
+        if (null == server) {
+            namedialog.setLabel(2);
+            return false;
+        }
+        namedialog.setLabel(1);
+        int offset = server.indexOf(':');
+        String ip = server.substring(0, offset);
+        int port = Integer.parseInt(server.substring(offset + 1));
         try {
-            client = new Socket("localhost", 8888);
+            client = new Socket(ip, port);
         } catch (Exception e) {
             e.printStackTrace();
             this.setConnected(false);

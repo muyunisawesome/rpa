@@ -14,7 +14,6 @@ import entity.User;
 public class IUserDaoImp implements IUserDao {
 
     String sql = null;
-    BaseDao b = new BaseDao();
 
     /**
      * 功能: 根据姓名查找该玩家信息
@@ -24,9 +23,9 @@ public class IUserDaoImp implements IUserDao {
      */
     @Override
     public User findUser(String userName) {
-        sql = "select * from user where name=?";
+        sql = "select * from gobang_user where name=?";
         String paras[] = {userName};
-        ResultSet r = b.doQuery(sql, paras);
+        ResultSet r = BaseDao.doQuery(sql, paras);
         User u = null;
         try {
             while (r.next()) {
@@ -52,8 +51,8 @@ public class IUserDaoImp implements IUserDao {
      */
     public List<User> findAll() {
         // TODO Auto-generated method stub
-        String sql = "select * from userinfo";
-        ResultSet rs = b.doQuery(sql);
+        String sql = "select * from gobang_user";
+        ResultSet rs = BaseDao.doQuery(sql);
         ArrayList list = new ArrayList();
         User ui = null;
         try {
@@ -77,9 +76,9 @@ public class IUserDaoImp implements IUserDao {
      */
     @Override
     public void updateUserImag(String new_FileName, String uname) {
-        sql = "update user set fileName=?  where name=? ";
+        sql = "update gobang_user set fileName=?  where name=? ";
         String[] paras = {new_FileName, uname};
-        b.doUpdate(sql, paras);
+        BaseDao.doUpdate(sql, paras);
     }
 
 
@@ -90,9 +89,9 @@ public class IUserDaoImp implements IUserDao {
      */
     @Override
     public void deleteUser(String userName) {
-        sql = "delete from user where name=?";
+        sql = "delete from gobang_user where name=?";
         String[] paras = {userName};
-        b.doUpdate(sql, paras);
+        BaseDao.doUpdate(sql, paras);
 
     }
 
@@ -104,10 +103,10 @@ public class IUserDaoImp implements IUserDao {
      */
     @Override
     public int findWinNum(String userName) {
-        sql = "select * from user where name=?";
+        sql = "select * from gobang_user where name=?";
         String[] paras = {userName};
         int t = 1;
-        ResultSet rs = b.doQuery(sql, paras);
+        ResultSet rs = BaseDao.doQuery(sql, paras);
         User u = null;
         try {
             while (rs.next()) {
@@ -131,22 +130,22 @@ public class IUserDaoImp implements IUserDao {
      */
     @Override
     public void update(int new_winNum, String name) {
-        sql = "update user set winNum=? where name=?";
+        sql = "update gobang_user set winNum=? where name=?";
         String[] paras = {new_winNum + "", name};
-        b.doUpdate(sql, paras);
+        BaseDao.doUpdate(sql, paras);
     }
 
     public void insertUser(User user) {
-        sql = "insert into user(name,winNum,loseNum,tiedNum) values(?,?,?,?)";
+        sql = "insert into gobang_user(name,winNum,loseNum,tiedNum) values(?,?,?,?)";
         System.out.println("新增用户");
         String[] paras = {user.getName(), 0 + "", 0 + "", 0 + ""};
-        b.doInsert(sql, paras);
+        BaseDao.doInsert(sql, paras);
     }
 
     public void updateLoseNum(int loseNum, String name) {
-        sql = "update user set loseNum=? where name=?";
+        sql = "update gobang_user set loseNum=? where name=?";
         String[] paras = {loseNum + "", name};
-        b.doUpdate(sql, paras);
+        BaseDao.doUpdate(sql, paras);
     }
 }
 	

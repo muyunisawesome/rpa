@@ -18,10 +18,13 @@ import java.awt.event.ActionListener;
  */
 public class NameDialog extends JDialog {
 
+    private String jlabelTip1 = "请输入姓名";
+    private String jlabelTip2 = "请输入姓名-没有发现服务器";
+
     private Home home;
     private NameDialog nameDialog = this;
     private JTextField nameTextField = new JTextField();
-    private JLabel nameTip = new JLabel("请输入姓名");
+    private JLabel nameTip = new JLabel(jlabelTip1);
     private JButton ok = new JButton("确定");
     private JButton cancel = new JButton("取消");
 
@@ -34,7 +37,7 @@ public class NameDialog extends JDialog {
         this.setBounds((int) (home.getWidth() * 0.4), (int) (home.getHeight() * 0.4), 260, 150);
         this.setLayout(null);
 
-        nameTip.setBounds(30, 20, 100, 15);
+        nameTip.setBounds(30, 20, 300, 15);
         nameTextField.setBounds(30, 40, 200, 30);
         ok.setBounds(30, 80, 90, 30);
         cancel.setBounds(140, 80, 90, 30);
@@ -102,5 +105,13 @@ public class NameDialog extends JDialog {
     }
 
     public void loginFail() {
+    }
+
+    public void setLabel(int index) {
+        if (index == 1) {
+            nameTip.setText(jlabelTip1);
+        } else {
+            nameTip.setText(jlabelTip2);
+        }
     }
 }

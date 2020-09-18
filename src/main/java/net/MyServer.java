@@ -3,6 +3,7 @@ package net;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 
 import javax.management.MBeanServer;
 
+import dao.IServerDao;
+import dao.IServerDaoImpl;
 import dao.IUserDao;
 import dao.IUserDaoImp;
 import entity.RoomPojo;
@@ -27,6 +30,7 @@ import msg.BaseMsg;
 public class MyServer {
     private static MyServer myserver;
     public IUserDao userDao = new IUserDaoImp();
+    public IServerDao serverDao = new IServerDaoImpl();
 
     private MyServer() {
     }
@@ -96,8 +100,10 @@ public class MyServer {
      * @return 返回服务器是否启动
      */
     public boolean startListen() {
+        int port = 8888;
         try {
-            server = new ServerSocket(8888);
+            server = new ServerSocket(port);
+            serverDao.register(InetAddress.getLocalHost().getHostAddress().concat(":").concat(String.valueOf(port)));
             started = true;
             System.out.println("服务器启动成功");
         } catch (IOException e) {

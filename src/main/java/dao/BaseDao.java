@@ -123,7 +123,7 @@ public class BaseDao {
         }
     }
 
-    public boolean doInsert(String sql, String[] paras) {
+    public static boolean doInsert(String sql, String[] paras) {
         Connection connection = getConnection();
         if (connection == null)
             return false;
