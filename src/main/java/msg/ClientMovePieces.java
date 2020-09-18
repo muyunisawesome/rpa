@@ -9,8 +9,6 @@ import entity.RoomPojo;
 
 /**
  * 用户将落子的棋谱传递给服务器
- *
- *
  */
 public class ClientMovePieces extends BaseMsg {
     private int roomid;

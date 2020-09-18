@@ -1,10 +1,9 @@
 package msg;
 
 import net.MyClient;
+
 /**
  * 服务器向胜利的一方发送的报文类
- *
- *
  */
 public class ServerWinMsg extends BaseMsg{
 

@@ -1,10 +1,9 @@
 package msg;
 
 import net.MyClient;
+
 /**
  * 服务端向客户端发送悔棋失败的报文类
- *
- *
  */
 public class ServerBackFail extends BaseMsg{
 

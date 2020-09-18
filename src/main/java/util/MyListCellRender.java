@@ -6,7 +6,7 @@ import java.awt.*;
 import entity.User;
 
 /**
- * Created by huanghuanhuan on 10/3/16.
+ *
  */
 public class MyListCellRender extends JLabel implements ListCellRenderer {
   @Override

@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * 播放音乐线程
- * Created by huanghuanhuan on 9/30/16.
+ *
  */
 public class AudioPlayer implements Runnable {
     private String fileName;

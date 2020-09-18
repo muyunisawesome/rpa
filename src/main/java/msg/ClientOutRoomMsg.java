@@ -7,7 +7,6 @@ import net.MyServer;
 
 /**
  * 功能: 退出房间报文类
- *
  */
 public class ClientOutRoomMsg extends BaseMsg {
   private Room room;

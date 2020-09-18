@@ -8,12 +8,12 @@ import net.MyClient;
 
 import net.MyClient;
 import entity.User;
+
 /**
  * 记录全体在线用户的报文类，由服务器发往客户端
- *
- *
  */
 public class ServerUserListMsg extends BaseMsg {
+
 	private List<User> userList;
 	
 	public List<User> getUserList() {
