@@ -24,7 +24,6 @@ import util.ResourceLoad;
  * 房间界面
  */
 public class Room extends JFrame {
-
     public boolean gameStart;
     public boolean backGame;
     private RoomList roomList;
@@ -136,7 +135,8 @@ public class Room extends JFrame {
      * 功能：初始化房间、棋盘
      */
     public void init(final int model) {
-      this.setIconImage(new ImageIcon(ResourceLoad.load("resource/imag/logo.png")).getImage());
+        this.setIconImage(new ImageIcon(ResourceLoad.load("resource/imag/logo.png")).getImage());
+
         this.setTitle("五子棋");
         this.setSize(1000, 800);
         this.setResizable(false);
@@ -165,7 +165,7 @@ public class Room extends JFrame {
             gamer2.add(lblNewLabel_1);
 
             JLabel label_2 = new JLabel();
-            label_2.setIcon(new ImageIcon(user.getFileName()));
+            label_2.setIcon(new ImageIcon(ResourceLoad.load(user.getFileName())));
             label_2.setBounds(62, 35, 70, 70);
             label_2.setOpaque(false);
             gamer2.add(label_2);
@@ -209,7 +209,7 @@ public class Room extends JFrame {
         label.setOpaque(false);
         gamer1.add(label);
         /*
-         * ImageIcon icon_ready=new ImageIcon("resource/imag/ready_icon.png");
+         * ImageIcon icon_ready=new ImageIcon(ResourceLoad.load("resource/imag/ready_icon.png");
          * JLabel Icon_ready = new JLabel(icon_ready); JPanel toastPanel = new
          * JPanel(); toastPanel.setBackground(Color.BLACK);
          * toastPanel.add(Icon_ready); gameRoom.add(toastPanel,
@@ -374,7 +374,6 @@ public class Room extends JFrame {
 
     /**
      * 设置另一个玩家
-     *
      * @param roomPojo
      */
     public void setAnotherPlayer(RoomPojo roomPojo) {
@@ -399,7 +398,7 @@ public class Room extends JFrame {
         }
         if (user != null) {
             ready1.setVisible(flag);
-            label.setIcon(new ImageIcon(user.getFileName()));
+            label.setIcon(new ImageIcon(ResourceLoad.load(user.getFileName())));
             lblNewLabel.setText(user.getName());
             jLabelll.setText(user.getWinNum() + "");
             jLabellll.setText(user.getLoseNum() + "");
@@ -435,7 +434,7 @@ public class Room extends JFrame {
     }
 
     /**
-     * 功能：跳转至房间列表页面
+     * 功能：跳转至房间列表页面 作者：林珊珊
      */
     public void toRoomList() {
         if (home == null)

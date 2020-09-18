@@ -207,6 +207,8 @@ public class ChessTable extends JPanel {
 
     /**
      * 输入：监听器所获取的鼠标坐标 功能：为棋盘绘出棋子 输出：无
+     *
+     * @author 林珊珊
      */
     boolean paintItem(int i, int j) {// 落子
         boolean succeed = false;
@@ -242,7 +244,7 @@ public class ChessTable extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-      g.drawImage(new ImageIcon(ResourceLoad.load("resource/imag/pan.png")).getImage(), -8, -8,
+        g.drawImage(new ImageIcon(ResourceLoad.load("resource/imag/pan.png")).getImage(), -8, -8,
                 565, 565, this);
         // }
         Graphics2D g2 = (Graphics2D) g;
@@ -330,6 +332,7 @@ public class ChessTable extends JPanel {
     /**
      * 输入：监听器所获取的鼠标坐标 功能：为棋盘作悔棋操作 输出：无
      *
+     * @author 林珊珊
      */
     public void unpaintItem() {
         if (model == 0) {//联机悔棋

@@ -15,11 +15,12 @@ import java.awt.event.WindowEvent;
 
 /**
  * 功能: 登录界面
+ * 作者: 黄欢欢  时间: 2016-09-20
  */
 public class Home extends JFrame {
     private User user = new User("游客");
     private Home home = this;
-    private JButton userButton = new JButton();  // 用户已登录显示自己姓名的按钮
+    private JButton userButton = new JButton();       // 用户已登录显示自己姓名的按钮
     private JButton netButton = new JButton("联网对战");    // 联网对战按钮
     private JButton robotButton = new JButton("人机对战");  // 人机对战按钮
     private JButton logoffButton = new JButton("退出");  // 退出按钮
@@ -37,6 +38,7 @@ public class Home extends JFrame {
 
     /**
      * 功能: 初始化界面
+     * 作者: 黄欢欢   时间: 2016-09-21
      */
     private void init() {
         this.setTitle("五子棋");
@@ -73,6 +75,7 @@ public class Home extends JFrame {
 
     /**
      * 功能: 给成员属性添加监听事件
+     * 作者: 黄欢欢   时间: 2016-09-21
      */
     private void addAction() {
         //退出按钮

@@ -8,6 +8,7 @@ import net.MyClient;
 import net.MyServer;
 /**
  * 服务器将落子后的棋谱传递给对面的客户端
+ * @author john
  *
  */
 public class ServerMovePieces extends BaseMsg{

@@ -6,16 +6,9 @@ public class ResourceLoad {
 
     private static final boolean BIN = true;
 
-    public static final String load(String resource) {
-        if (!BIN) {
-            return resource;
-        }
-        URL url = ResourceLoad.class.getResource("/");
-        String uri = url.getPath();
-        if (resource.startsWith("/")) {
-            return uri.concat(resource);
-        }
-        return uri.concat("/").concat(resource);
+    public static final URL load(String resource) {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        return loader.getResource(resource);
     }
 
 }
