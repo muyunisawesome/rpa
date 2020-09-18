@@ -2,6 +2,7 @@ package chess;
 
 
 import com.jtattoo.plaf.mcwin.McWinLookAndFeel;
+import net.MyServer;
 import util.AudioPlayer;
 
 import javax.swing.*;
@@ -13,6 +14,12 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
+
+        if (args.length > 0) {
+            MyServer.main(args);
+            return;
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
