@@ -7,7 +7,7 @@ import entity.User;
 /**
  * 功能: User类数据库连接接口
  *
- * @author 黄欢欢  时间: 2016-09-26
+ *
  */
 public interface IUserDao {
     /**

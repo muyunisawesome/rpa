@@ -6,7 +6,7 @@ import net.MyServer;
 /**
  * 被悔棋者向服务端发送是否愿意接收悔棋的报文类
  *
- * @author john
+ *
  */
 public class ClientBackResult extends BaseMsg {
 

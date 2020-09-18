@@ -8,7 +8,7 @@ import net.MyServer;
 /**
  * 用户登录报文类，由客户端发送至服务器端
  *
- * @author john
+ *
  * 时间：2016.09.21
  */
 

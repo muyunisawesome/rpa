@@ -17,7 +17,7 @@ import msg.BaseMsg;
 /**
  * 客户端类
  *
- * @author john
+ *
  */
 public class MyClient {
 
@@ -116,7 +116,7 @@ public class MyClient {
     /**
      * 不断接受报文类并执行其Biz方法的线程
      *
-     * @author john
+     *
      */
     class ReceiveServerThread extends Thread {
         private Socket client;

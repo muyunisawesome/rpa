@@ -15,7 +15,7 @@ public interface IChess {
 
     /**
      * 功能: 悔棋时删除棋盘上的棋子
-     * 作者: 黄欢欢   时间: 2016-09-20
+     *
      *
      * @param type 1:白棋   2:黑棋
      */
@@ -23,7 +23,7 @@ public interface IChess {
 
     /**
      * 功能: 判断是否连成五子
-     * 作者: 黄欢欢   时间: 2016-09-20
+     *
      *
      * @param x    横坐标
      * @param y    纵坐标
