@@ -1,6 +1,5 @@
 package msg;
 
-import entity.User;
 import net.MyServer;
 
 /**
@@ -9,7 +8,7 @@ import net.MyServer;
 public class ClientLogoutMsg extends BaseMsg {
 
     public void doBiz() {
-        MyServer.getMyServer().deleteUserCilent(this.client);
+        MyServer.getMyServer().deleteUserClient(this.client); //服务器删除用户
         ServerUserListMsg msg2 = new ServerUserListMsg(MyServer.getMyServer().getUserList());
         MyServer.getMyServer().sendMsgToAll(msg2);
     }

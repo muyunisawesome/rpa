@@ -43,13 +43,15 @@ public class MyServer {
     public static MyServer getMyServer() {
         if (myserver == null) {
             myserver = new MyServer();
-            myserver.resetRooms();
+            myserver.resetRooms(); //服务器启，重置房间列表
         }
         return myserver;
     }
 
-    private List<RoomPojo> rooms = new ArrayList<RoomPojo>();
-    public static List<ClientChatThread> pool = new ArrayList();//socket池
+    private List<RoomPojo> rooms = new ArrayList<>();
+
+    public static List<ClientChatThread> pool = new ArrayList<>();//socket连接池
+
     ServerSocket server = null;
     private static boolean started = false;
 
@@ -136,10 +138,9 @@ public class MyServer {
 
     /**
      * 线程类处理多客户端连接
-     *
-     *
      */
     class WaitForClientThread extends Thread {
+
         public void run() {
             try {
                 while (true) {
@@ -159,8 +160,6 @@ public class MyServer {
 
     /**
      * 处理所连接的客户端的报文类数据收发
-     *
-     *
      */
     public class ClientChatThread extends Thread {
         private User user;
@@ -202,6 +201,7 @@ public class MyServer {
             }
         }
 
+        @Override
         public void run() {
             try {
                 while (true) {
@@ -256,7 +256,7 @@ public class MyServer {
      *
      * @param client
      */
-    public void deleteUserCilent(Socket client) {
+    public void deleteUserClient(Socket client) {
         for (ClientChatThread c : pool) {
             if (c.getClient() == client) {
                 c.setUser(null);
@@ -265,6 +265,9 @@ public class MyServer {
         }
     }
 
+    /**
+     * 已登录
+     */
     public boolean loged(User user) {
         for (ClientChatThread c : pool) {
             if (user.equals(c.getUser())) {

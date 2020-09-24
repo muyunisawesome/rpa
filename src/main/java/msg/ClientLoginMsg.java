@@ -30,12 +30,12 @@ public class ClientLoginMsg extends BaseMsg {
         if (!username.isEmpty()) {
             //1.生成response報文
             User user = MyServer.getMyServer().findUser(username);
-            if (!MyServer.getMyServer().loged(user)) {
+            if (!MyServer.getMyServer().loged(user)) { //已登录
                 ServerDidLogMsg msg3 = new ServerDidLogMsg();
                 MyServer.getMyServer().sendMsgToClient(msg3, this.client);
                 return;
             }
-            ServerLoginSucMsg msg = new ServerLoginSucMsg(user);
+            ServerLoginSucMsg msg = new ServerLoginSucMsg(user); //登录成功
             //2.服务器发送报文给指定客户
             System.out.println(msg);
             MyServer.getMyServer().sendMsgToClient(msg, this.client);
