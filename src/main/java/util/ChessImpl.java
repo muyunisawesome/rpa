@@ -12,9 +12,9 @@ public class ChessImpl implements IChess {
     private int wgrade, bgrade;
     private boolean start;
     private int wmat, wnat, bmde, bnde;
-    private static int h = 17;    //chess[0][type+14] chess[1][type+14] 保留黑子最近下的2颗棋
+    private static int h = 17;    //chess[0][type+14] chess[1][type+14] 保留黑子最近下的2颗棋。用于悔棋
     private static int w = 17;   //chess[2][15]标记当前最新下的棋子颜色
-    public static int[][] chess = new int[h][w];
+    public static int[][] chess = new int[h][w]; //其中0代表未落子
     private boolean[][][] oldblacktable = new boolean[15][15][572]; // 旧黑棋获胜组合
     private boolean[][][] oldwhitetable = new boolean[15][15][572]; // 旧白棋获胜组合
     private int[][] oldwnum = new int[15][15]; // 旧白棋在棋盘上各个位置的分值
@@ -351,13 +351,13 @@ public class ChessImpl implements IChess {
         }
         for (i = 0; i < 572; i++) {
             if (this.blacktable[x][y][i] && this.win[2][i] != 7) {
-                this.win[2][i]++;//给黑子的所有五连子可能的加载当前连子数
+                this.win[2][i]++;//给黑子的所有五连子可能的加载当前连子数 2黑子
 
             }
             if (this.whitetable[x][y][i]) {
                 this.whitetable[x][y][i] = false;
 
-                this.win[1][i] = 7;
+                this.win[1][i] = 7; //1白字，7代表对方不能落子，代表白子不能再xy落
             }
         }
         for (i = 0; i <= 14; i++)
@@ -368,7 +368,7 @@ public class ChessImpl implements IChess {
                     for (k = 0; k < 572; k++)
                         // 遍历该棋盘可落子点上的黑子所有权值的连子情况，并给该落子点加上相应奖励分
                         if (this.blacktable[i][j][k]) {
-                            switch (this.win[2][k]) {
+                            switch (this.win[2][k]) { // 黑----------
                                 case 1: // 一连子
                                     this.bnum[i][j] += 5;
                                     break;
@@ -388,12 +388,12 @@ public class ChessImpl implements IChess {
                     for (k = 0; k < 572; k++)
                         // 遍历该棋盘可落子点上的白子所有权值的连子情况，并给该落子点加上相应奖励分
                         if (this.whitetable[i][j][k]) {
-                            switch (this.win[1][k]) {
+                            switch (this.win[1][k]) { //白-----------
                                 case 1: // 一连子
                                     this.wnum[i][j] += 5;
                                     break;
                                 case 2: // 两连子
-                                    this.wnum[i][j] += 52;
+                                    this.wnum[i][j] += 52; //这些都是权重
                                     break;
                                 case 3: // 三连子
                                     this.wnum[i][j] += 150;
@@ -429,6 +429,7 @@ public class ChessImpl implements IChess {
                             this.bnde = j;
                         }
                     }
+            //定义白字落点
             if (this.wgrade >= this.bgrade) { // 如果白子的最佳落子点的权值比黑子的最佳落子点权值大，则电脑的最佳落子点为白子的最佳落子点，否则相反
                 m = wmat;
                 n = wnat;
@@ -451,7 +452,7 @@ public class ChessImpl implements IChess {
             if (this.blacktable[m][n][i]) {
                 this.blacktable[m][n][i] = false;
 
-                this.win[2][i] = 7;
+                this.win[2][i] = 7; //黑子不能落子
             }
         }
 
