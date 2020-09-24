@@ -100,7 +100,7 @@ public class MyServer {
      * @return 返回服务器是否启动
      */
     public boolean startListen() {
-        int port = 8888;
+        int port = 8887;
         try {
             server = new ServerSocket(port);
             serverDao.register(InetAddress.getLocalHost().getHostAddress().concat(":").concat(String.valueOf(port)));

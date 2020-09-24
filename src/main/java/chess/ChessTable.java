@@ -37,7 +37,7 @@ public class ChessTable extends JPanel {
     //停止声音
     private AudioPlayer audioStopPlayer = new AudioPlayer("resource/audio/stop.wav");
     private ChessTable chessTable = this;
-    private boolean lock = false; // 同步锁
+    private boolean lock = false; // 同步锁，是否轮到（人机）下
     private int humanX; // 鼠标点击的坐标
     private int humanY; // 鼠标点击的坐标
     public int model; //对战模式，网络对战0、人机对战1
@@ -89,7 +89,7 @@ public class ChessTable extends JPanel {
         hasMovedSteps = 0;
         model = 1;
         this.room = room;
-        chessimpl.ResetGame();
+        chessimpl.resetGame();
 
         this.setBounds(0, 0, BOARD_WIDTH, BOARD_WIDTH);
         pool.execute(humanThread); // 开启人类线程
@@ -103,7 +103,7 @@ public class ChessTable extends JPanel {
         System.out.println("机器线程开启");
         synchronized (chessTable) {
             while (true) {
-                if (!lock) {
+                if (!lock) { //
                     try {
                         wait();
                     } catch (Exception e) {
@@ -115,9 +115,9 @@ public class ChessTable extends JPanel {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    int[] XY = chessimpl.ComTurn(humanX, humanY);
-                    mark[XY[0]][XY[1]] = 1;
-                    repaint();
+                    int[] XY = chessimpl.comTurn(humanX, humanY);
+                    mark[XY[0]][XY[1]] = 1; //1是白棋
+                    repaint(); //重刷棋盘JPanel
                     hasMovedSteps++;
                     lock = false;
                     audioPlayer.run();

@@ -38,7 +38,7 @@ public class ClientBackChess extends BaseMsg {
         this.isleft = isleft;
     }
 
-
+    @Override
     public void doBiz() {
         RoomPojo roompojo = MyServer.getMyServer().getRooms().get(roomid);
         if (isleft) {

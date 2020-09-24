@@ -34,7 +34,7 @@ public interface IChess {
     /**
      * 功能：初始化棋盘，默认棋牌每个位置初始值为：0；
      */
-    void ResetGame();
+    void resetGame();
 
     /**
      * 功能：判断五子棋人机电脑默认为白方，
@@ -44,5 +44,5 @@ public interface IChess {
      * @param y 纵坐标
      * @return
      */
-    int[] ComTurn(int x, int y);
+    int[] comTurn(int x, int y);
 }

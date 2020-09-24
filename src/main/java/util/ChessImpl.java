@@ -8,8 +8,8 @@ public class ChessImpl implements IChess {
     private boolean[][][] whitetable = new boolean[15][15][572]; // 白棋获胜组合
     private int[][] wnum = new int[15][15]; // 白棋在棋盘上各个位置的分值
     private int[][] bnum = new int[15][15]; // 黑棋在棋盘上各个位置的分值
-    private int wgrade, bgrade;
     private int[][] win = new int[3][572]; // 记录棋子在棋盘上的获胜组合中填入了多少棋子
+    private int wgrade, bgrade;
     private boolean start;
     private int wmat, wnat, bmde, bnde;
     private static int h = 17;    //chess[0][type+14] chess[1][type+14] 保留黑子最近下的2颗棋
@@ -25,6 +25,7 @@ public class ChessImpl implements IChess {
     boolean white = false;
     boolean black = false;
 
+    @Override
     public boolean add(int x, int y, int type) {
         if (chess[x][y] != 0) {
             System.out.println("这个位置已经放过棋子了");
@@ -47,6 +48,7 @@ public class ChessImpl implements IChess {
         return true;
     }
 
+    @Override
     public void delete(int type) {
         int flag = 0;
         for (int i = 0; i < 15; i++) {
@@ -119,6 +121,7 @@ public class ChessImpl implements IChess {
 
     }
 
+    @Override
     public boolean compare(int x, int y, int type) {
 
         // System.out.println(white+""+black);
@@ -134,14 +137,12 @@ public class ChessImpl implements IChess {
             for (int a = j; a < j + 5; a++) {
                 if (chess[x][a] == 1) {
                     s++;
-
                 }
                 if (chess[x][a] == 2)
                     z++;
             }
             if (s == 5) {
                 white = true;
-
             }
             if (z == 5) {
                 black = true;
@@ -269,7 +270,7 @@ public class ChessImpl implements IChess {
 
     }
 
-    public void ResetGame() {
+    public void resetGame() {
         this.icount = 0;
         this.start = true;
         // 初始化棋盘
@@ -326,7 +327,7 @@ public class ChessImpl implements IChess {
 
     }
 
-    public int[] ComTurn(int x, int y) { // 找出电脑（白子）最佳落子点
+    public int[] comTurn(int x, int y) { // 找出电脑（白子）最佳落子点
 
         int index[] = new int[2];
         for (int i = 0; i < 15; i++) {

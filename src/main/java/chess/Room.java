@@ -270,7 +270,7 @@ public class Room extends JFrame {
             refresh.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    chessPanel.getChessimpl().ResetGame();
+                    chessPanel.getChessimpl().resetGame();
                     repaint();
                 }
             });
@@ -299,7 +299,7 @@ public class Room extends JFrame {
                     ClientOutRoomMsg msg1 = new ClientOutRoomMsg(rid, isleft);
                     MyClient.getMyClient().sendMsg(msg1);
                 }
-                chessPanel.getChessimpl().ResetGame();
+                chessPanel.getChessimpl().resetGame();
                 toRoomList();
             }
         });
@@ -514,7 +514,7 @@ public class Room extends JFrame {
         ready1.setIcon(new ImageIcon(ResourceLoad.load("resource/imag/ready.png")));
         ready.setVisible(false);
         ready1.setVisible(false);
-        chessPanel.getChessimpl().ResetGame();
+        chessPanel.getChessimpl().resetGame();
         repaint();
         visible = false;
         chessPanel.hasMovedSteps = 0;
