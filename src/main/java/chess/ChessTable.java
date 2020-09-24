@@ -48,7 +48,7 @@ public class ChessTable extends JPanel {
 //    public static final int chess_EMPTY = 0;
 //    public static boolean isReady = false;
     public int hasMovedSteps;// 本局比赛已下的总步数
-    private int[][] mark = new int[15][15];
+    private int[][] mark = new int[15][15]; // 0未落 1有落
     public static IChess chessImpl = new ChessImpl();
 
     public static IChess getChessImpl() {
@@ -350,6 +350,9 @@ public class ChessTable extends JPanel {
         repaint();
     }
 
+    /**
+     * 接收下棋，棋谱传对家
+     */
     public void receiveChess(int[][] chess, boolean backChess, int x, int y) {
         if (!backChess) {
             room.setCanplay(true);
