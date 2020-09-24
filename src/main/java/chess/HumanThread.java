@@ -19,7 +19,8 @@ public class HumanThread implements Runnable {
      * 人类线程开启鼠标监听
      */
     public void run() {
-        //期盼添加鼠标监听器
+
+        //棋盘添加鼠标监听器
         chessTable.addMouseListener(chessTable.new MouseHandler());
     }
 

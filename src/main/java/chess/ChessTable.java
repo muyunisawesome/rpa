@@ -30,8 +30,8 @@ import util.ResourceLoad;
 public class ChessTable extends JPanel {
 
     private Executor pool = Executors.newFixedThreadPool(2); // 2个线程容量的线程池
-    private RobotThread robotThread = new RobotThread(this, chessimpl); // 机器人线程
-    private HumanThread humanThread = new HumanThread(this, chessimpl); // 人类线程
+    private RobotThread robotThread = new RobotThread(this, chessImpl); // 机器人线程
+    private HumanThread humanThread = new HumanThread(this, chessImpl); // 人类线程
     //下棋声音
     private AudioPlayer audioPlayer = new AudioPlayer("resource/audio/down.wav");
     //停止声音
@@ -43,16 +43,16 @@ public class ChessTable extends JPanel {
     public int model; //对战模式，网络对战0、人机对战1
     private Room room;
 
-    public static final int chess_BLACK = 2;
-    public static final int chess_WHITE = 1;
-    public static final int chess_EMPTY = 0;
-    public static boolean isReady = false;
+//    public static final int chess_BLACK = 2;
+//    public static final int chess_WHITE = 1;
+//    public static final int chess_EMPTY = 0;
+//    public static boolean isReady = false;
     public int hasMovedSteps;// 本局比赛已下的总步数
     private int[][] mark = new int[15][15];
-    public static IChess chessimpl = new ChessImpl();
+    public static IChess chessImpl = new ChessImpl();
 
-    public static IChess getChessimpl() {
-        return chessimpl;
+    public static IChess getChessImpl() {
+        return chessImpl;
     }
 
     public void setMark(int x, int y) {
@@ -63,6 +63,7 @@ public class ChessTable extends JPanel {
      * 制作棋盘的宽高;
      */
     public static final int BOARD_WIDTH = 515;
+
     /**
      * 计算棋盘表格坐标(单元格宽高相等)
      */
@@ -72,7 +73,7 @@ public class ChessTable extends JPanel {
      * 功能：记录落子情况 其中0表示无子，1表示白棋，2表示黑子
      * 15X15的棋盘
      */
-    public static int[][] map = new int[15][15];
+    //public static int[][] map = new int[15][15];
 
     public ChessTable(Room room) {
 
@@ -89,7 +90,7 @@ public class ChessTable extends JPanel {
         hasMovedSteps = 0;
         model = 1;
         this.room = room;
-        chessimpl.resetGame();
+        chessImpl.resetGame();
 
         this.setBounds(0, 0, BOARD_WIDTH, BOARD_WIDTH);
         pool.execute(humanThread); // 开启人类线程
@@ -103,28 +104,28 @@ public class ChessTable extends JPanel {
         System.out.println("机器线程开启");
         synchronized (chessTable) {
             while (true) {
-                if (!lock) { //
+                if (!lock) { //如果没轮到则等待
                     try {
                         wait();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
+                } else { //轮到这下棋
                     try {
                         Thread.sleep(700);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    int[] XY = chessimpl.comTurn(humanX, humanY);
+                    int[] XY = chessImpl.comTurn(humanX, humanY);
                     mark[XY[0]][XY[1]] = 1; //1是白棋
                     repaint(); //重刷棋盘JPanel
                     hasMovedSteps++;
-                    lock = false;
+                    lock = false; //下完继续轮给对家
                     audioPlayer.run();
                     if (hasMovedSteps == 225)
                         room.pingju();
-                    else if (chessimpl.compare(XY[0], XY[1], 1)) {
-                        room.deafeat();
+                    else if (chessImpl.compare(XY[0], XY[1], 1)) {
+                        room.defeat();
                     } else
                         chessTable.notifyAll();
                 }
@@ -133,10 +134,13 @@ public class ChessTable extends JPanel {
     }
 
     /**
-     * 输入：鼠标点击 功能：为棋盘设定鼠标监听器 <br>
+     * 输入：鼠标点击 <br>
+     * 功能：为棋盘设定鼠标监听器 <br>
      * 输出：棋盘落子效果 <br>
      */
     public class MouseHandler extends MouseAdapter {
+
+        @Override
         public void mousePressed(MouseEvent event) {
 
             synchronized (chessTable) {
@@ -158,7 +162,7 @@ public class ChessTable extends JPanel {
                             audioPlayer.run();
                             if (hasMovedSteps == 225)
                                 room.pingju();
-                            else if (chessimpl.compare(humanX, humanY, 2)) {
+                            else if (chessImpl.compare(humanX, humanY, 2)) {
                                 room.win();
                             } else
                                 chessTable.notifyAll();
@@ -182,12 +186,12 @@ public class ChessTable extends JPanel {
                                 room.repaint();
                                 audioPlayer.run();
                                 if (room.isleft) {
-                                    if (chessimpl.compare(humanX, humanY, 2)) {//黑棋赢了，发送游戏结束报文
+                                    if (chessImpl.compare(humanX, humanY, 2)) {//黑棋赢了，发送游戏结束报文
                                         ClientGameOver msg1 = new ClientGameOver(room.getRid(), room.isleft);
                                         MyClient.getMyClient().sendMsg(msg1);
                                     }
                                 } else {
-                                    if (chessimpl.compare(humanX, humanY, 1)) {//白棋赢了
+                                    if (chessImpl.compare(humanX, humanY, 1)) {//白棋赢了
                                         ClientGameOver msg1 = new ClientGameOver(room.getRid(), room.isleft);
                                         MyClient.getMyClient().sendMsg(msg1);
                                     }
@@ -206,27 +210,26 @@ public class ChessTable extends JPanel {
     }
 
     /**
-     * 输入：监听器所获取的鼠标坐标 功能：为棋盘绘出棋子 输出：无
-     *
-     *
+     * 输入：监听器所获取的鼠标坐标
+     * 功能：为棋盘绘出棋子 输出：无
      */
     boolean paintItem(int i, int j) {// 落子
         boolean succeed = false;
         if (i < 15 && j < 15) {
             if (model == 1) {// 人机
-                if (!chessimpl.add(i, j, 2)) {
+                if (!chessImpl.add(i, j, 2)) {
                     return false;// 棋子不能下在这个位置
                 }
                 return true;
             } else {// 网络对战
                 if (room.isleft) {// 黑棋玩家
                     hasMovedSteps++;
-                    succeed = chessimpl.add(i, j, 2);
+                    succeed = chessImpl.add(i, j, 2);
 
 
                 } else {// 白棋玩家
                     hasMovedSteps++;
-                    succeed = chessimpl.add(i, j, 1);
+                    succeed = chessImpl.add(i, j, 1);
 
 
                 }
@@ -255,7 +258,6 @@ public class ChessTable extends JPanel {
         /*
          * 功能：加载单元格间距
          */
-
         for (int i = 0, WIDTH = 35; i < draw.length; i++, WIDTH += 34) {
             draw[i] = WIDTH;
         }
@@ -330,20 +332,20 @@ public class ChessTable extends JPanel {
     }
 
     /**
-     * 输入：监听器所获取的鼠标坐标 功能：为棋盘作悔棋操作 输出：无
-     *
-     *
+     * 输入：监听器所获取的鼠标坐标
+     * 功能：为棋盘作悔棋操作
+     * 输出：无
      */
     public void unpaintItem() {
         if (model == 0) {//联机悔棋
             if (room.isleft) {
-                chessimpl.delete(2);//黑方悔棋
+                chessImpl.delete(2);//黑方悔棋
             } else {
-                chessimpl.delete(1);//白方悔棋
+                chessImpl.delete(1);//白方悔棋
             }
             //Moves--;
         } else {
-            chessimpl.delete(2);
+            chessImpl.delete(2);
         }
         repaint();
     }

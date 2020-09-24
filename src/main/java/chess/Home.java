@@ -75,7 +75,6 @@ public class Home extends JFrame {
 
     /**
      * 功能: 给成员属性添加监听事件
-     *
      */
     private void addAction() {
         //退出按钮
@@ -118,7 +117,7 @@ public class Home extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.out.println("退出程序");
-                //想服务器发送客户端对出请求
+                //向服务器发送客户端对出请求
                 ClientLogoutMsg msg = new ClientLogoutMsg();
                 MyClient.getMyClient().sendMsg(msg);
             }
@@ -138,6 +137,7 @@ public class Home extends JFrame {
      */
     @Override
     public void repaint(long time, int x, int y, int width, int height) {
+        //窗口重绘是两个功能按钮
         netButton.setBounds((int) (this.getWidth() * 0.2), (int) (this.getHeight() * 0.5), this.getWidth() / 6,
                 this.getHeight() / 13);
         robotButton.setBounds((int) (this.getWidth() * 0.2), (int) (this.getHeight() * 0.6), this.getWidth() / 6,
@@ -150,18 +150,18 @@ public class Home extends JFrame {
     public void toRoomList(User user) {
         this.user = user;
         new RoomList(this, user);
-        userButton.setText(user.getName());
-        contentPane.remove(netButton);
-        contentPane.add(userButton);
-        contentPane.add(logoffButton);
-        this.setVisible(false);
+        userButton.setText(user.getName()); //进入房间后,设置用户按钮显示名字
+        contentPane.remove(netButton); // 主面板移出"联机按钮"
+        contentPane.add(userButton); // 添加显示用户按钮
+        contentPane.add(logoffButton); // 添加退出按钮
+        this.setVisible(false); //隐藏登录主界面
     }
 
     /**
-     * 功能: 跳转至房间
+     * 功能: 跳转至房间（人机）
      */
-    public void toRoom() {
-        new Room(this);
-        this.setVisible(false);
+    private void toRoom() {
+        new Room(this); // 游戏房间界面
+        this.setVisible(false); //隐藏登录主界面
     }
 }

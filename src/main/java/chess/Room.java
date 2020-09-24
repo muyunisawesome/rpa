@@ -27,18 +27,20 @@ public class Room extends JFrame {
     public boolean gameStart;
     public boolean backGame;
     private RoomList roomList;
-    private Home home;
+    private Home home; //主界面
     private int rid;// 房间编号
     private User leftPlayer;// 房间内左边玩家
     private User rightPlayer;// 房间内右边玩家
     private static boolean canplay = false;
     private static boolean beforeRegret = false;
     public boolean visible = false;
-    JPanel gamer1 = new JPanel();
-    JLabel jLabellll = new JLabel();
-    JLabel jLabelll = new JLabel();
+    JPanel gamer1 = new JPanel(); //第一个玩家
+    JLabel label = new JLabel(); //第一个头像
+    JLabel lblNewLabel = new JLabel(); //第一个昵称
+    JLabel jLabellll = new JLabel(); //第一个输多少
+    JLabel jLabelll = new JLabel(); //第一个赢多少
     JLabel ready = new JLabel(); //准备标签
-    JLabel ready1 = new JLabel(); //准备标签
+    JLabel ready1 = new JLabel(); //第一个准备标签
     JLabel label_4;
     //private boolean isLeftPlay=false;//左边玩家是否可落子
     //private boolean isRightPlay=false;//右边玩家是否可落子
@@ -121,9 +123,6 @@ public class Room extends JFrame {
         this.status = status;
     }
 
-    JLabel label = new JLabel();
-    JLabel lblNewLabel = new JLabel();
-
     public Room(Home home) {
         this.home = home;
         init(1);// 人机
@@ -154,26 +153,27 @@ public class Room extends JFrame {
         }
 
 
-        JPanel gamer2 = new JPanel();
+        JPanel gamer2 = new JPanel(); //第二个玩家
         gamer2.setBounds(10, 408, 180, 290);
         getContentPane().add(gamer2);
         gamer2.setLayout(null);
         gamer2.setOpaque(false);
         if (user != null) {
+            //第二个玩家昵称
             JLabel lblNewLabel_1 = new JLabel(user.getName());
             lblNewLabel_1.setBounds(85, 110, 130, 45);
             gamer2.add(lblNewLabel_1);
-
+            //第二个玩家头像
             JLabel label_2 = new JLabel();
             label_2.setIcon(new ImageIcon(ResourceLoad.load(user.getFileName())));
             label_2.setBounds(62, 35, 70, 70);
             label_2.setOpaque(false);
             gamer2.add(label_2);
-
+            //第二个玩家赢多少
             label_3 = new JLabel(user.getWinNum() + "");
             label_3.setBounds(85, 190, 45, 45);
             gamer2.add(label_3);
-
+            //第二个玩家输多少
             label_4 = new JLabel(user.getLoseNum() + "");
             label_4.setBounds(85, 240, 45, 45);
             gamer2.add(label_4);
@@ -270,7 +270,7 @@ public class Room extends JFrame {
             refresh.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    chessPanel.getChessimpl().resetGame();
+                    chessPanel.getChessImpl().resetGame();
                     repaint();
                 }
             });
@@ -299,7 +299,7 @@ public class Room extends JFrame {
                     ClientOutRoomMsg msg1 = new ClientOutRoomMsg(rid, isleft);
                     MyClient.getMyClient().sendMsg(msg1);
                 }
-                chessPanel.getChessimpl().resetGame();
+                chessPanel.getChessImpl().resetGame();
                 toRoomList();
             }
         });
@@ -352,7 +352,7 @@ public class Room extends JFrame {
                             JOptionPane.DEFAULT_OPTION, JOptionPane.YES_NO_OPTION,
                             new ImageIcon(ResourceLoad.load("resource/imag/touxiang.png")), options, options[0]);
                     if (res == 1) {
-                        deafeat();
+                        defeat();
                     }
                 } else {
                     if (gameStart == true) {
@@ -373,7 +373,7 @@ public class Room extends JFrame {
     }
 
     /**
-     * 设置另一个玩家
+     * 显示另对家
      * @param roomPojo
      */
     public void setAnotherPlayer(RoomPojo roomPojo) {
@@ -420,6 +420,9 @@ public class Room extends JFrame {
         }
     }
 
+    /**
+     * 玩家准备
+     */
     public void setReady(RoomPojo roomPojo) {
         if (roomPojo.getRid() != rid) return;
         if (isleft) {
@@ -445,11 +448,9 @@ public class Room extends JFrame {
         this.dispose();
     }
 
-
-    public static void main(String[] args) {
-        Room r = new Room(new Home());
-    }
-
+    /**
+     * 游戏开始
+     */
     public void gameStart() {
         gameStart = true;
         new AudioPlayer("resource/audio/start.wav").run();
@@ -467,6 +468,9 @@ public class Room extends JFrame {
         //}
     }
 
+    /**
+     * 是否认爸爸决定
+     */
     public void decide() {
         boolean result;
         String[] options = {"收", "滚"};
@@ -487,6 +491,9 @@ public class Room extends JFrame {
         MyClient.getMyClient().sendMsg(msg);
     }
 
+    /**
+     * 悔棋失败
+     */
     public void BackFail() {
         if (beforeRegret) {
             setCanplay(true);
@@ -497,6 +504,9 @@ public class Room extends JFrame {
 
     }
 
+    /**
+     * 悔棋成功
+     */
     public void BackSucceed() {
         backGame = false;
         setCanplay(true);
@@ -507,6 +517,7 @@ public class Room extends JFrame {
                 "乖儿子", "对方同意了你的请求", JOptionPane.ERROR_MESSAGE);
     }
 
+    //重置游戏
     private void resetGame() {
         gameStart = false;
         setCanplay(false);
@@ -514,12 +525,15 @@ public class Room extends JFrame {
         ready1.setIcon(new ImageIcon(ResourceLoad.load("resource/imag/ready.png")));
         ready.setVisible(false);
         ready1.setVisible(false);
-        chessPanel.getChessimpl().resetGame();
+        chessPanel.getChessImpl().resetGame();
         repaint();
         visible = false;
         chessPanel.hasMovedSteps = 0;
     }
 
+    /**
+     * 赢了
+     */
     public void win() {
         if (chessPanel.model == 0) {
             user = MyServer.getMyServer().findUser(user.getName());
@@ -533,7 +547,10 @@ public class Room extends JFrame {
         resetGame();
     }
 
-    public void deafeat() {
+    /**
+     * 失败
+     */
+    public void defeat() {
         if (chessPanel.model == 0) {
             jLabelll.setText("" + (Integer.parseInt(jLabelll.getText()) + 1));
             jLabellll.setText("" + (Integer.parseInt(jLabellll.getText()) + 1));
@@ -545,6 +562,9 @@ public class Room extends JFrame {
         resetGame();
     }
 
+    /**
+     * 和棋
+     */
     public void pingju() {
         new Thread(new AudioPlayer("resource/audio/pingju.wav")).start();
         JOptionPane.showMessageDialog(this,

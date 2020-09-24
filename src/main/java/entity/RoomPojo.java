@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * 房间实体类
- *
- *
  */
 
 public class RoomPojo implements Serializable {
